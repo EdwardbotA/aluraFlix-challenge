@@ -2,7 +2,6 @@ import homeActivo from "./home-activo.png";
 import homeinactivo from "./home-inactivo.png";
 import addActivo from "./añadir-activo.png";
 import addinactivo from "./añadir-inactivo.png";
-import logo from "./Logo.png";
 import Button from "../Button";
 import styled from "styled-components";
 
@@ -38,7 +37,7 @@ const ShadowStyles = styled.div`
   }
 `;
 
-const LogoStyles = styled.img`
+export const LogoStyles = styled.img`
   display: none;
 
   @media (width > 1024px) {
@@ -59,7 +58,7 @@ const ButtonContainer = styled.div`
 	}
 `;
 
-const Header = () => {
+const Header = ({ logo }) => {
   return (
     <HeaderStyles>
       <ShadowStyles />

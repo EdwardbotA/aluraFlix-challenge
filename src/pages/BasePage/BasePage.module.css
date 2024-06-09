@@ -1,4 +1,7 @@
 .container {
-	background-color: var(--main-background-black);
 	width: 100%;
+	height: 100svh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
