@@ -2,10 +2,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+	font-size: 62.5%;
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Source sans Pro', sans-serif ;
   line-height: 1.5;
   font-weight: 400;
 
@@ -13,8 +14,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
 
-body {
-  font-size: 62.5%;
+	--main-background-black: #191919;
+	--secondary-background-dark-blue: #030910;
+	--main-color-blue: #2271D1;
+	--button-shadow-color: #0b223f;
 }
