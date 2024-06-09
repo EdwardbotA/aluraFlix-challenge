@@ -47,7 +47,7 @@ export const LogoStyles = styled.img`
   }
 `;
 
-const ButtonContainer = styled.div`
+const ButtonContainer = styled.nav`
   display: flex;
   justify-content: space-evenly;
   width: 100%;
