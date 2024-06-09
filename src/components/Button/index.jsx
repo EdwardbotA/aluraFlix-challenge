@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const LinkStyles = styled(Link)`
@@ -14,30 +14,53 @@ const LinkStyles = styled(Link)`
   text-decoration: none;
   border: ${(props) =>
     props.$active ? "3px solid var(--main-color-blue)" : "none"};
-  color: ${(props) => (props.$active ? "var(--main-color-blue)" : "")};
+  color: ${(props) =>
+    props.$active ? "var(--main-color-blue)" : "var(--secondary-white)"};
   background: ${(props) =>
     props.$active ? "var(--button-shadow-color)" : "none"};
+
+  p {
+    display: ${(props) => (props.$active ? "block" : "none")};
+  }
+
+  @media (width > 1024px) {
+    min-width: 180px;
+    justify-content: center;
+    border: ${(props) =>
+      props.$active
+        ? "3px solid var(--main-color-blue)"
+        : "3px solid var(--secondary-white)"};
+    border-radius: 10px;
+    background: none;
+    box-shadow: ${(props) =>
+      props.$active ? "inset 0px 0px 12px 2px rgb(34, 113, 209)" : ""};
+
+    p {
+      display: block;
+    }
+  }
 `;
 
 const ImgStyles = styled.img`
   height: ${(props) => (props.$active ? "25px" : "100%")};
+
+  @media (width > 1024px) {
+    display: none;
+  }
 `;
 
-const Button = ({
-  iconActive,
-  iconInactive,
-  active = false,
-  children,
-  route,
-}) => {
+const Button = ({ iconActive, iconInactive, children, path }) => {
+  const location = useLocation();
+  const isActive = location.pathname === path;
+
   return (
-    <LinkStyles to={route} $active={active}>
+    <LinkStyles to={path} $active={isActive}>
       <ImgStyles
-        $active={active}
-        src={active ? iconActive : iconInactive}
+        $active={isActive}
+        src={isActive ? iconActive : iconInactive}
         alt={`icono de ${children}`}
       />
-      {active && children}
+      <p>{children}</p>
     </LinkStyles>
   );
 };
