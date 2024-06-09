@@ -1,9 +1,9 @@
-import styles from "./Home.module.css";
+import Banner from "../../components/Banner";
 
 const Home = () => {
   return (
     <>
-      <h1>Hola from home</h1>
+      <Banner />
     </>
   );
 };
