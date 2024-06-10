@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import CourseTitle from "../CourseTitle";
 import Card from "../Card";
+import { useEffect, useState } from "react";
 
 const SectionStyles = styled.section`
   width: 100%;
@@ -31,16 +32,24 @@ const CourseContainer = styled.div`
 `;
 
 const CourseSection = ({ category }) => {
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/videos")
+      .then((res) => res.json())
+      .then((data) => setVideos(data));
+  }, []);
+
   const { color, nombre } = category;
   return (
     <SectionStyles>
       <CourseTitle color={color}>{nombre}</CourseTitle>
       <CourseContainer>
-        <Card color={color} />
-        <Card color={color} />
-        <Card color={color} />
-        <Card color={color} />
-        <Card color={color} />
+        {videos
+          .filter((video) => video.Categoria === nombre)
+          .map((video) => (
+            <Card color={color} key={video.id} video={video} />
+          ))}
       </CourseContainer>
     </SectionStyles>
   );
