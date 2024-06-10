@@ -13,6 +13,7 @@ const TitleStyles = styled.h2`
 
 	@media (width > 1024px) {
 		font-size: 3.2rem;
+		width: 432px
 	}
 `;
 
