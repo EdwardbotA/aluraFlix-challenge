@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import Banner from "../../components/Banner";
 import CourseSection from "../../components/CourseSection";
-import { useEffect, useState } from "react";
 import Modal from "../../components/Modal";
+import { useContext } from "react";
+import { GlobalContext } from "../../context/Context";
 
 const HomeContainer = styled.section`
   position: relative;
@@ -14,21 +15,15 @@ const HomeContainer = styled.section`
 `;
 
 const Home = () => {
-  const [categories, setCategory] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/categorias")
-      .then((res) => res.json())
-      .then((data) => setCategory(data));
-  }, []);
-
+  const { categories } = useContext(GlobalContext);
+	
   return (
     <HomeContainer>
       <Banner />
       {categories.map((category) => (
         <CourseSection key={category.id} category={category} />
       ))}
-			<Modal />
+      <Modal />
     </HomeContainer>
   );
 };
