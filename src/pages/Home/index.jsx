@@ -2,8 +2,10 @@ import styled from "styled-components";
 import Banner from "../../components/Banner";
 import CourseSection from "../../components/CourseSection";
 import { useEffect, useState } from "react";
+import Modal from "../../components/Modal";
 
 const HomeContainer = styled.section`
+  position: relative;
   padding-bottom: 100px;
 
   @media (width > 1024px) {
@@ -26,6 +28,7 @@ const Home = () => {
       {categories.map((category) => (
         <CourseSection key={category.id} category={category} />
       ))}
+			<Modal />
     </HomeContainer>
   );
 };

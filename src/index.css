@@ -15,10 +15,13 @@
   -moz-osx-font-smoothing: grayscale;
 
   --main-background-black: #191919;
+  --main-gray: #262626;
   --secondary-background-dark-blue: #030910;
   --main-color-blue: #2271d1;
-	--scrollbar-color: #2271d12b;
+  --scrollbar-color: #2271d12b;
   --button-shadow-color: #0b223f;
-	--secondary-white: #ffffff;
+  --shadow-color: #03122fc8;
+  --background-modal: #03122f;
+  --secondary-white: #ffffff;
   font-size: 62.5%;
 }
