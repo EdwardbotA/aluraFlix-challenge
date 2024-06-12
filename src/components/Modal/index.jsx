@@ -3,6 +3,8 @@ import closeBtn from "./cerrar.png";
 import FormInput from "../FormInput";
 import OptionInput from "../OptionInput";
 import ActionBtn from "../ActionBtn";
+import { useContext } from "react";
+import { GlobalContext } from "../../context/Context";
 
 const Overlay = styled.div`
   background-color: var(--shadow-color);
@@ -57,47 +59,73 @@ const ButtonClose = styled.button`
 `;
 
 const ButtonContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
 
-const Modal = () => {
+const Modal = ({ video, closeModal }) => {
+  const { category, setCategory } = useContext(GlobalContext);
+
   return (
     <>
-      <Overlay />
-      <DialogStyles open>
-        <FormStyles method="dialog">
-          <ButtonClose>
-            <img src={closeBtn} alt="Cerrar" />
-          </ButtonClose>
-          <TitleStyles>Editar card:</TitleStyles>
+      {video && (
+        <>
+          <Overlay />
+          <DialogStyles open={!!video} onClose={closeModal}>
+            <FormStyles method="dialog">
+              <ButtonClose>
+                <img src={closeBtn} alt="Cerrar" />
+              </ButtonClose>
+              <TitleStyles>Editar card:</TitleStyles>
 
-          <FormInput placeholder="Título del video" from="modal">
-            Título
-          </FormInput>
-          <OptionInput placeholder="Escoja una categoría" from="modal">
-            Categoria
-          </OptionInput>
-          <FormInput placeholder="link de la imagen" type="url" from="modal">
-            Imagen
-          </FormInput>
-          <FormInput placeholder="Link del video" type="url" from="modal">
-            Video
-          </FormInput>
-          <FormInput
-            big
-            placeholder="¿De qué se trata este vídeo?"
-            from="modal"
-          >
-            Descripción
-          </FormInput>
-          <ButtonContainer>
-            <ActionBtn main>Guardar</ActionBtn>
-            <ActionBtn>limpiar</ActionBtn>
-          </ButtonContainer>
-        </FormStyles>
-      </DialogStyles>
+              <FormInput
+                inputValue={video.titulo}
+                placeholder="Título del video"
+                from="modal"
+              >
+                Título
+              </FormInput>
+              <OptionInput
+                inputValue={category}
+                placeholder="Escoja una categoría"
+                from="modal"
+              >
+                {console.log(video.Categoria)}
+                Categoria
+              </OptionInput>
+              <FormInput
+                inputValue={video.linkImagenVideo}
+                placeholder="link de la imagen"
+                type="url"
+                from="modal"
+              >
+                Imagen
+              </FormInput>
+              <FormInput
+                inputValue={video.linkVideo}
+                placeholder="Link del video"
+                type="url"
+                from="modal"
+              >
+                Video
+              </FormInput>
+              <FormInput
+                inputValue={video.descripcion}
+                big
+                placeholder="¿De qué se trata este vídeo?"
+                from="modal"
+              >
+                Descripción
+              </FormInput>
+              <ButtonContainer>
+                <ActionBtn main>Guardar</ActionBtn>
+                <ActionBtn>limpiar</ActionBtn>
+              </ButtonContainer>
+            </FormStyles>
+          </DialogStyles>
+        </>
+      )}
     </>
   );
 };

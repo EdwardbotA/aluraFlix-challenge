@@ -15,15 +15,15 @@ const HomeContainer = styled.section`
 `;
 
 const Home = () => {
-  const { categories } = useContext(GlobalContext);
-	
+  const { categories, selectedVideo, setSelectedVideo } = useContext(GlobalContext);
+
   return (
     <HomeContainer>
       <Banner />
       {categories.map((category) => (
         <CourseSection key={category.id} category={category} />
       ))}
-      <Modal />
+      <Modal video={selectedVideo} closeModal={() => setSelectedVideo(null)} />
     </HomeContainer>
   );
 };

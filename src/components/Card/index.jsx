@@ -2,6 +2,8 @@ import styled from "styled-components";
 import EditButton from "./EditButton";
 import deleteIcon from "./borrar.png";
 import editIcon from "./editar.png";
+import { useContext } from "react";
+import { GlobalContext } from "../../context/Context";
 
 const CardContainer = styled.article`
   width: 374px;
@@ -17,7 +19,7 @@ const CardContainer = styled.article`
   @media (width > 1024px) {
     width: 430px;
     min-width: 430px;
-		height: 318px;
+    height: 318px;
   }
 `;
 
@@ -48,12 +50,18 @@ const ButtonContainer = styled.div`
 
 const Card = ({ color, video }) => {
   const { linkImagenVideo, titulo } = video;
+  const { setSelectedVideo } = useContext(GlobalContext);
+
   return (
     <CardContainer>
       <ImageStyles src={linkImagenVideo} alt={titulo} />
       <ButtonContainer $color={color}>
-        <EditButton img={deleteIcon}>Borrar</EditButton>
-        <EditButton img={editIcon}>Editar</EditButton>
+        <EditButton video={video} img={deleteIcon}>
+          Borrar
+        </EditButton>
+        <EditButton action={setSelectedVideo} video={video} img={editIcon}>
+          Editar
+        </EditButton>
       </ButtonContainer>
       <Shadow $color={color} />
     </CardContainer>

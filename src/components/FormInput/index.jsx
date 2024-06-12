@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { GlobalContext } from "../../context/Context";
 
 const LabelStyles = styled.label`
   width: 100%;
@@ -48,9 +50,11 @@ const FormInput = ({
   type = "text",
   from,
   placeholder,
-  value = "",
+  inputValue = "",
   big,
 }) => {
+  const { handleChange } = useContext(GlobalContext);
+
   return (
     <LabelStyles>
       {children}
@@ -58,15 +62,17 @@ const FormInput = ({
         <TextareaStyles
           $from={from}
           type={type}
-          value={value}
+          value={inputValue}
           placeholder={placeholder}
+          onChange={handleChange}
         />
       ) : (
         <InputStyles
           $from={from}
           type={type}
-          value={value}
+          value={inputValue}
           placeholder={placeholder}
+          onChange={handleChange}
         />
       )}
     </LabelStyles>

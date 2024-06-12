@@ -7,19 +7,19 @@ const ButtonStyles = styled.button`
   background: none;
   border: none;
   align-items: center;
-	cursor: pointer;
+  cursor: pointer;
 `;
 
 const TextStyles = styled.span`
   color: var(--secondary-white);
-	font-size: 1.6rem;
-	font-weight: bold;
-	text-transform: uppercase;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
 `;
 
-const EditButton = ({ img, children }) => {
+const EditButton = ({ img, children, video, action }) => {
   return (
-    <ButtonStyles>
+    <ButtonStyles onClick={() => action(video)}>
       <img src={img} alt={`icono de ${children}`} />
       <TextStyles>{children}</TextStyles>
     </ButtonStyles>

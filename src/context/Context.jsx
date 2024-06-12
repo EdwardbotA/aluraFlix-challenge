@@ -3,13 +3,21 @@ import { createContext, useEffect, useState } from "react";
 export const GlobalContext = createContext();
 
 const GlobalContextProvider = ({ children }) => {
-  const [categories, setCategory] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [videos, setVideos] = useState([]);
+
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [image, setImage] = useState("");
+  const [video, setVideo] = useState("");
+  const [description, setDescription] = useState("");
+
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:3000/categorias")
       .then((res) => res.json())
-      .then((data) => setCategory(data));
+      .then((data) => setCategories(data));
   }, []);
 
   useEffect(() => {
@@ -18,8 +26,22 @@ const GlobalContextProvider = ({ children }) => {
       .then((data) => setVideos(data));
   }, []);
 
+  const handleChange = (e) => {
+    console.dir(e.target.value);
+  };
+
   return (
-    <GlobalContext.Provider value={{ categories, videos }}>
+    <GlobalContext.Provider
+      value={{
+        categories,
+        videos,
+        handleChange,
+        selectedVideo,
+        setSelectedVideo,
+        category,
+        setCategory,
+      }}
+    >
       {children}
     </GlobalContext.Provider>
   );

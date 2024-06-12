@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { GlobalContext } from "../../context/Context";
 
 const LabelStyles = styled.label`
   width: 100%;
@@ -24,16 +26,20 @@ const InputStyles = styled.select`
       : "3px solid var(--main-gray)"};
 `;
 
-const OptionInput = ({ children, from, placeholder }) => {
+const OptionInput = ({ children, from, placeholder, inputValue }) => {
+  const { handleChange, categories } = useContext(GlobalContext);
   return (
     <LabelStyles>
       {children}
-      <InputStyles $from={from} value="">
+      <InputStyles $from={from} value={inputValue} onChange={handleChange}>
         <option value="" disabled defaultValue="" hidden>
           {placeholder}
         </option>
-        <option value="">front end</option>
-        <option value="">back end</option>
+        {categories.map((category) => (
+          <option value="" key={category.id}>
+            {category.nombre}
+          </option>
+        ))}
       </InputStyles>
     </LabelStyles>
   );
