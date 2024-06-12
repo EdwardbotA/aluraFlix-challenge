@@ -3,7 +3,7 @@ import closeBtn from "./cerrar.png";
 import FormInput from "../FormInput";
 import OptionInput from "../OptionInput";
 import ActionBtn from "../ActionBtn";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GlobalContext } from "../../context/Context";
 
 const Overlay = styled.div`
@@ -65,7 +65,22 @@ const ButtonContainer = styled.div`
 `;
 
 const Modal = ({ video, closeModal }) => {
-  const { category, setCategory } = useContext(GlobalContext);
+  const { title, image, category, videoLink, description, handleInputChange } =
+    useContext(GlobalContext);
+
+  useEffect(() => {
+    const getInitialValue = () => {
+      if (video) {
+        handleInputChange("titulo", video.titulo || "");
+        handleInputChange("categoria", video.Categoria || "");
+        handleInputChange("imagen", video.linkImagenVideo || "");
+        handleInputChange("video", video.linkVideo || "");
+        handleInputChange("descripcion", video.descripcion || "");
+      }
+    };
+
+    getInitialValue();
+  }, [video]);
 
   return (
     <>
@@ -80,9 +95,10 @@ const Modal = ({ video, closeModal }) => {
               <TitleStyles>Editar card:</TitleStyles>
 
               <FormInput
-                inputValue={video.titulo}
+                inputValue={title}
                 placeholder="Título del video"
                 from="modal"
+                name="titulo"
               >
                 Título
               </FormInput>
@@ -90,31 +106,34 @@ const Modal = ({ video, closeModal }) => {
                 inputValue={category}
                 placeholder="Escoja una categoría"
                 from="modal"
+                name="categoria"
               >
-                {console.log(video.Categoria)}
                 Categoria
               </OptionInput>
               <FormInput
-                inputValue={video.linkImagenVideo}
+                inputValue={image}
                 placeholder="link de la imagen"
                 type="url"
                 from="modal"
+                name="imagen"
               >
                 Imagen
               </FormInput>
               <FormInput
-                inputValue={video.linkVideo}
+                inputValue={videoLink}
                 placeholder="Link del video"
                 type="url"
                 from="modal"
+                name="video"
               >
                 Video
               </FormInput>
               <FormInput
-                inputValue={video.descripcion}
+                inputValue={description}
                 big
                 placeholder="¿De qué se trata este vídeo?"
                 from="modal"
+                name="descripcion"
               >
                 Descripción
               </FormInput>

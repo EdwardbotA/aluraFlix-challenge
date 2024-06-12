@@ -26,17 +26,28 @@ const InputStyles = styled.select`
       : "3px solid var(--main-gray)"};
 `;
 
-const OptionInput = ({ children, from, placeholder, inputValue }) => {
-  const { handleChange, categories } = useContext(GlobalContext);
+const OptionInput = ({ children, from, placeholder, inputValue, name }) => {
+  const { categories, handleInputChange } = useContext(GlobalContext);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    handleInputChange(name, value);
+  };
+
   return (
     <LabelStyles>
       {children}
-      <InputStyles $from={from} value={inputValue} onChange={handleChange}>
+      <InputStyles
+        $from={from}
+        value={inputValue}
+        name={name}
+        onChange={handleChange}
+      >
         <option value="" disabled defaultValue="" hidden>
           {placeholder}
         </option>
         {categories.map((category) => (
-          <option value="" key={category.id}>
+          <option value={category.nombre} key={category.id}>
             {category.nombre}
           </option>
         ))}

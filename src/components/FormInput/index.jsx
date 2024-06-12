@@ -52,8 +52,14 @@ const FormInput = ({
   placeholder,
   inputValue = "",
   big,
+  name,
 }) => {
-  const { handleChange } = useContext(GlobalContext);
+  const { handleInputChange } = useContext(GlobalContext);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    handleInputChange(name, value);
+  };
 
   return (
     <LabelStyles>
@@ -65,6 +71,7 @@ const FormInput = ({
           value={inputValue}
           placeholder={placeholder}
           onChange={handleChange}
+          name={name}
         />
       ) : (
         <InputStyles
@@ -73,6 +80,7 @@ const FormInput = ({
           value={inputValue}
           placeholder={placeholder}
           onChange={handleChange}
+          name={name}
         />
       )}
     </LabelStyles>

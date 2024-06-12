@@ -50,13 +50,13 @@ const ButtonContainer = styled.div`
 
 const Card = ({ color, video }) => {
   const { linkImagenVideo, titulo } = video;
-  const { setSelectedVideo } = useContext(GlobalContext);
+  const { setSelectedVideo, deleteVideo } = useContext(GlobalContext);
 
   return (
     <CardContainer>
       <ImageStyles src={linkImagenVideo} alt={titulo} />
       <ButtonContainer $color={color}>
-        <EditButton video={video} img={deleteIcon}>
+        <EditButton action={deleteVideo} video={video} img={deleteIcon}>
           Borrar
         </EditButton>
         <EditButton action={setSelectedVideo} video={video} img={editIcon}>

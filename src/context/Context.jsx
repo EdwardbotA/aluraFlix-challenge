@@ -9,7 +9,7 @@ const GlobalContextProvider = ({ children }) => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
-  const [video, setVideo] = useState("");
+  const [videoLink, setVideo] = useState("");
   const [description, setDescription] = useState("");
 
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -26,20 +26,50 @@ const GlobalContextProvider = ({ children }) => {
       .then((data) => setVideos(data));
   }, []);
 
-  const handleChange = (e) => {
-    console.dir(e.target.value);
+  const deleteVideo = (id) => {
+    const newVideos = videos.filter((video) => video.id !== id);
+
+    setVideos(newVideos);
+  };
+
+  const handleInputChange = (name, value) => {
+    switch (name) {
+      case "titulo":
+        setTitle(value);
+        break;
+      case "categoria":
+        setCategory(value);
+        break;
+      case "imagen":
+        setImage(value);
+        break;
+      case "video":
+        setVideo(value);
+        break;
+      case "descripcion":
+        setDescription(value);
+        break;
+
+      default:
+        break;
+    }
   };
 
   return (
     <GlobalContext.Provider
       value={{
-        categories,
-        videos,
-        handleChange,
-        selectedVideo,
-        setSelectedVideo,
+        title,
+        image,
         category,
+        videoLink,
+        description,
+        videos,
+        categories,
+        selectedVideo,
+        handleInputChange,
+        setSelectedVideo,
         setCategory,
+        deleteVideo,
       }}
     >
       {children}

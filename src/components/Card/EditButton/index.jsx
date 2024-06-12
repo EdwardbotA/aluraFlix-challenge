@@ -19,7 +19,9 @@ const TextStyles = styled.span`
 
 const EditButton = ({ img, children, video, action }) => {
   return (
-    <ButtonStyles onClick={() => action(video)}>
+    <ButtonStyles
+      onClick={() => (children === "Borrar" ? action(video.id) : action(video))}
+    >
       <img src={img} alt={`icono de ${children}`} />
       <TextStyles>{children}</TextStyles>
     </ButtonStyles>
