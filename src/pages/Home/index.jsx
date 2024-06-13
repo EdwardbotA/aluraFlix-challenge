@@ -6,8 +6,26 @@ import { useContext } from "react";
 import { GlobalContext } from "../../context/Context";
 
 const HomeContainer = styled.section`
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   padding-bottom: 100px;
+	
+  @media (width > 1024px) {
+    padding-bottom: 0;
+  }
+`;
+
+const DivStyles = styled.div`
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  font-size: 2.4rem;
+  font-weight: bold;
+  background-color: var(--main-background-black);
+  color: var(--secondary-white);
+  padding-top: 40px;
+  padding-bottom: 140px;
 
   @media (width > 1024px) {
     padding-bottom: 0;
@@ -15,14 +33,25 @@ const HomeContainer = styled.section`
 `;
 
 const Home = () => {
-  const { categories, selectedVideo, setSelectedVideo } = useContext(GlobalContext);
+  const { categories, selectedVideo, setSelectedVideo, videos } =
+    useContext(GlobalContext);
 
   return (
     <HomeContainer>
       <Banner />
-      {categories.map((category) => (
-        <CourseSection key={category.id} category={category} />
-      ))}
+      {videos.length > 0 ? (
+        categories.map((category) => (
+          <CourseSection
+            key={category.id}
+            category={category}
+            videos={videos.filter(
+              (video) => video.Categoria === category.nombre
+            )}
+          />
+        ))
+      ) : (
+        <DivStyles>No hay videos que mostrar</DivStyles>
+      )}
       <Modal video={selectedVideo} closeModal={() => setSelectedVideo(null)} />
     </HomeContainer>
   );

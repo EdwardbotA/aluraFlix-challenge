@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import CourseTitle from "../CourseTitle";
 import Card from "../Card";
-import { GlobalContext } from '../../context/Context'
-import { useContext } from "react";
 
 const SectionStyles = styled.section`
   width: 100%;
@@ -10,6 +8,7 @@ const SectionStyles = styled.section`
   padding: 40px 27px;
   display: flex;
   flex-direction: column;
+  flex: 1;
   gap: 40px;
 
   @media (width > 1024px) {
@@ -32,21 +31,22 @@ const CourseContainer = styled.div`
   }
 `;
 
-const CourseSection = ({ category }) => {
-  const { videos } = useContext(GlobalContext);
+const CourseSection = ({ category, videos }) => {
   const { color, nombre } = category;
 
   return (
-    <SectionStyles>
-      <CourseTitle color={color}>{nombre}</CourseTitle>
-      <CourseContainer>
-        {videos
-          .filter((video) => video.Categoria === nombre)
-          .map((video) => (
-            <Card color={color} key={video.id} video={video} />
-          ))}
-      </CourseContainer>
-    </SectionStyles>
+    <>
+      {videos.length > 0 && (
+        <SectionStyles>
+          <CourseTitle color={color}>{nombre}</CourseTitle>
+          <CourseContainer>
+            {videos.map((video) => (
+              <Card color={color} key={video.id} video={video} />
+            ))}
+          </CourseContainer>
+        </SectionStyles>
+      )}
+    </>
   );
 };
 
