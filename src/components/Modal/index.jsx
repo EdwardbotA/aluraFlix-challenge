@@ -65,8 +65,15 @@ const ButtonContainer = styled.div`
 `;
 
 const Modal = ({ video, closeModal }) => {
-  const { title, image, category, videoLink, description, handleInputChange } =
-    useContext(GlobalContext);
+  const {
+    title,
+    image,
+    category,
+    videoLink,
+    description,
+    handleInputChange,
+    updateVideoInfo,
+  } = useContext(GlobalContext);
 
   useEffect(() => {
     const getInitialValue = () => {
@@ -82,13 +89,20 @@ const Modal = ({ video, closeModal }) => {
     getInitialValue();
   }, [video]);
 
+  const handleSubmit = (e) => {
+    let id = video.id;
+    let info = { title, image, category, videoLink, description, id };
+
+    updateVideoInfo(info);
+  };
+
   return (
     <>
       {video && (
         <>
           <Overlay />
           <DialogStyles open={!!video} onClose={closeModal}>
-            <FormStyles method="dialog">
+            <FormStyles method="dialog" onSubmit={handleSubmit}>
               <ButtonClose>
                 <img src={closeBtn} alt="Cerrar" />
               </ButtonClose>
@@ -138,8 +152,10 @@ const Modal = ({ video, closeModal }) => {
                 Descripción
               </FormInput>
               <ButtonContainer>
-                <ActionBtn main>Guardar</ActionBtn>
-                <ActionBtn>limpiar</ActionBtn>
+                <ActionBtn type="submit" main>
+                  Guardar
+                </ActionBtn>
+                <ActionBtn type="button">limpiar</ActionBtn>
               </ButtonContainer>
             </FormStyles>
           </DialogStyles>

@@ -32,6 +32,27 @@ const GlobalContextProvider = ({ children }) => {
     setVideos(newVideos);
   };
 
+  const updateVideoInfo = (data) => {
+    const { title, category, image, videoLink, description, id } = data;
+
+    const newInfo = videos.map((video) => {
+      if (video.id === id) {
+        return {
+          ...video,
+          titulo: title,
+          Categoria: category,
+          linkImagenVideo: image,
+          linkVideo: videoLink,
+          descripcion: description,
+        };
+      }
+
+      return video;
+    });
+
+    setVideos(newInfo);
+  };
+
   const handleInputChange = (name, value) => {
     switch (name) {
       case "titulo":
@@ -70,6 +91,7 @@ const GlobalContextProvider = ({ children }) => {
         setSelectedVideo,
         setCategory,
         deleteVideo,
+        updateVideoInfo,
       }}
     >
       {children}

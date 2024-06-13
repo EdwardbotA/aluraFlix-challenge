@@ -20,8 +20,12 @@ const ButtonStyles = styled.button`
     props.$main ? "inset 0px 0px 12px 2px rgb(34, 113, 209)" : ""};
 `;
 
-const ActionBtn = ({ children, main }) => {
-  return <ButtonStyles $main={main}>{children}</ButtonStyles>;
+const ActionBtn = ({ children, main, type }) => {
+  return (
+    <ButtonStyles type={type} $main={main}>
+      {children}
+    </ButtonStyles>
+  );
 };
 
 export default ActionBtn;
