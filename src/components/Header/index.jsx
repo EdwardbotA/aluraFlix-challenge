@@ -8,6 +8,7 @@ import styled from "styled-components";
 const HeaderStyles = styled.header`
   width: 100%;
   height: 100px;
+  min-height: 100px;
   background-color: var(--secondary-background-dark-blue);
   position: fixed;
   bottom: 0;
@@ -19,6 +20,7 @@ const HeaderStyles = styled.header`
     position: relative;
     justify-content: space-between;
     height: 125px;
+    min-height: 125px;
     padding: 0 20px;
   }
 `;
@@ -43,7 +45,7 @@ export const LogoStyles = styled.img`
   @media (width > 1024px) {
     display: block;
     height: 40px;
-		width: auto;
+    width: auto;
   }
 `;
 
@@ -52,10 +54,10 @@ const ButtonContainer = styled.nav`
   justify-content: space-evenly;
   width: 100%;
 
-	@media (width > 1024px) {
-		width: auto;
-		gap: 25px;
-	}
+  @media (width > 1024px) {
+    width: auto;
+    gap: 25px;
+  }
 `;
 
 const Header = ({ logo }) => {

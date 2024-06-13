@@ -26,6 +26,12 @@ const DialogStyles = styled.dialog`
   border: 5px solid #6bd1ff;
   padding: 60px 12px;
   background-color: var(--background-modal);
+
+  @media (width > 1024px) {
+    width: 70%;
+    top: 50px;
+    padding: 60px 140px;
+  }
 `;
 
 const FormStyles = styled.form`
@@ -41,6 +47,12 @@ const TitleStyles = styled.legend`
   color: var(--main-color-blue);
   font-size: 3.2rem;
   font-weight: bold;
+  text-transform: uppercase;
+
+  @media (width > 1024px) {
+    font-size: 6rem;
+    align-self: flex-start;
+  }
 `;
 
 const ButtonClose = styled.button`
@@ -56,12 +68,22 @@ const ButtonClose = styled.button`
   img {
     width: 100%;
   }
+
+  @media (width > 1024px) {
+    right: -125px;
+  }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @media (width > 1024px) {
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+  }
 `;
 
 const Modal = ({ video, closeModal }) => {

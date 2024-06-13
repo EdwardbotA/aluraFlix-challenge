@@ -5,6 +5,7 @@ const FooterStyles = styled.footer`
   position: relative;
   width: 100%;
   height: 125px;
+  min-height: 125px;
   display: none;
   justify-content: center;
   align-items: center;
