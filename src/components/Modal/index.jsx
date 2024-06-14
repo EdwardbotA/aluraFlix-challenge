@@ -39,7 +39,6 @@ const FormStyles = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 40px;
 `;
 
@@ -74,7 +73,7 @@ const ButtonClose = styled.button`
   }
 `;
 
-const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;

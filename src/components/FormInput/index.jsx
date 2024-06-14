@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { GlobalContext } from "../../context/Context";
 
 const LabelStyles = styled.label`
@@ -10,6 +10,10 @@ const LabelStyles = styled.label`
   gap: 15px;
   font-size: 2rem;
   font-weight: bold;
+
+  @media (min-width: 1024px) {
+    width: ${(props) => (props.$from === "modal" ? "100%" : "47%")};
+  }
 `;
 
 const InputStyles = styled.input`
@@ -48,7 +52,7 @@ const TextareaStyles = styled.textarea`
 const FormInput = ({
   children,
   type = "text",
-  from,
+  from = "",
   placeholder,
   inputValue = "",
   big,
@@ -62,7 +66,7 @@ const FormInput = ({
   };
 
   return (
-    <LabelStyles>
+    <LabelStyles $from={from}>
       {children}
       {big ? (
         <TextareaStyles

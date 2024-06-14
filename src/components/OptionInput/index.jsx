@@ -10,14 +10,22 @@ const LabelStyles = styled.label`
   gap: 15px;
   font-size: 2rem;
   font-weight: bold;
+
+  @media (min-width: 1024px) {
+    width: ${(props) => (props.$from === "modal" ? "100%" : "47%")};
+  }
 `;
 
 const InputStyles = styled.select`
+  font-family: "Source sans Pro", sans-serif;
   border-radius: 10px;
   height: 62px;
   font-size: 2rem;
   font-weight: 300;
-  background-color: var(--background-modal);
+  background-color: ${(props) =>
+    props.$from === "modal"
+      ? "var(--background-modal)"
+      : "var(--main-background-black)"};
   padding: 16px 4px;
   color: var(--secondary-white);
   border: ${(props) =>
@@ -26,7 +34,13 @@ const InputStyles = styled.select`
       : "3px solid var(--main-gray)"};
 `;
 
-const OptionInput = ({ children, from, placeholder, inputValue, name }) => {
+const OptionInput = ({
+  children,
+  from = "",
+  placeholder,
+  inputValue = "",
+  name,
+}) => {
   const { categories, handleInputChange } = useContext(GlobalContext);
 
   const handleChange = (e) => {
@@ -35,7 +49,7 @@ const OptionInput = ({ children, from, placeholder, inputValue, name }) => {
   };
 
   return (
-    <LabelStyles>
+    <LabelStyles $from={from}>
       {children}
       <InputStyles
         $from={from}
