@@ -53,6 +53,34 @@ const GlobalContextProvider = ({ children }) => {
     setVideos(newInfo);
   };
 
+  const createNewVideo = (data) => {
+    let newId = 1;
+
+    while (videos.some((video) => newId === video.id)) {
+      newId++;
+    }
+
+    const infoToSend = {
+      Categoria: data.category,
+      descripcion: data.description,
+      linkVideo: data.videoLink,
+      linkImagenVideo: data.image,
+      titulo: data.title,
+      id: newId,
+    };
+
+    return setVideos([...videos, infoToSend]);
+  };
+
+  const clearInputs = () => {
+		console.log('hola');
+    setTitle("");
+    setCategory("");
+    setImage("");
+    setVideo("");
+    setDescription("");
+  };
+
   const handleInputChange = (name, value) => {
     switch (name) {
       case "titulo":
@@ -92,6 +120,8 @@ const GlobalContextProvider = ({ children }) => {
         setCategory,
         deleteVideo,
         updateVideoInfo,
+        createNewVideo,
+        clearInputs,
       }}
     >
       {children}

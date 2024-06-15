@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import CourseTitle from "../CourseTitle";
 import Card from "../Card";
+import { useContext } from "react";
+import { GlobalContext } from "../../context/Context";
 
 const SectionStyles = styled.section`
   width: 100%;
@@ -31,7 +33,8 @@ const CourseContainer = styled.div`
   }
 `;
 
-const CourseSection = ({ category, videos }) => {
+const CourseSection = ({ category }) => {
+  const { videos } = useContext(GlobalContext);
   const { color, nombre } = category;
 
   return (
@@ -40,9 +43,11 @@ const CourseSection = ({ category, videos }) => {
         <SectionStyles>
           <CourseTitle color={color}>{nombre}</CourseTitle>
           <CourseContainer>
-            {videos.map((video) => (
-              <Card color={color} key={video.id} video={video} />
-            ))}
+            {videos
+              .filter((video) => video.Categoria === category.nombre)
+              .map((video) => (
+                <Card color={color} key={video.id} video={video} />
+              ))}
           </CourseContainer>
         </SectionStyles>
       )}

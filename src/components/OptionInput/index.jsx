@@ -56,6 +56,7 @@ const OptionInput = ({
         value={inputValue}
         name={name}
         onChange={handleChange}
+				required
       >
         <option value="" disabled defaultValue="" hidden>
           {placeholder}

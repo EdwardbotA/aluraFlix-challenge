@@ -3,6 +3,8 @@ import ActionBtn from "../../components/ActionBtn";
 import FormInput from "../../components/FormInput";
 import { ButtonContainer } from "../../components/Modal";
 import OptionInput from "../../components/OptionInput";
+import { useContext, useEffect } from "react";
+import { GlobalContext } from "../../context/Context";
 
 const AddContainer = styled.section`
   background-color: var(--main-background-black);
@@ -47,7 +49,7 @@ const FormStyles = styled.form`
 
   @media (width > 1024px) {
     flex-direction: row;
-		justify-content: space-between;
+    justify-content: space-between;
   }
 `;
 
@@ -63,6 +65,31 @@ const TitleStyles = styled.legend`
 `;
 
 const Add = () => {
+  const {
+    title,
+    image,
+    category,
+    videoLink,
+    description,
+    handleInputChange,
+    createNewVideo,
+    clearInputs,
+  } = useContext(GlobalContext);
+
+  useEffect(() => {
+    handleInputChange("titulo", "");
+    handleInputChange("categoria", "");
+    handleInputChange("imagen", "");
+    handleInputChange("video", "");
+    handleInputChange("descripcion", "");
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createNewVideo({ title, image, category, videoLink, description });
+    clearInputs();
+  };
+
   return (
     <AddContainer>
       <MainTitleContainer>
@@ -70,25 +97,25 @@ const Add = () => {
         <p>Complete el formulario para crear una nueva tarjeta de video</p>
       </MainTitleContainer>
 
-      <FormStyles>
+      <FormStyles onSubmit={handleSubmit}>
         <TitleStyles>crear tarjeta</TitleStyles>
 
         <FormInput
-          // inputValue={title}
+          inputValue={title}
           placeholder="Título del video"
           name="titulo"
         >
           Título
         </FormInput>
         <OptionInput
-          // inputValue={category}
+          inputValue={category}
           placeholder="Escoja una categoría"
           name="categoria"
         >
           Categoria
         </OptionInput>
         <FormInput
-          // inputValue={image}
+          inputValue={image}
           placeholder="link de la imagen"
           type="url"
           name="imagen"
@@ -96,7 +123,7 @@ const Add = () => {
           Imagen
         </FormInput>
         <FormInput
-          // inputValue={videoLink}
+          inputValue={videoLink}
           placeholder="Link del video"
           type="url"
           name="video"
@@ -104,7 +131,7 @@ const Add = () => {
           Video
         </FormInput>
         <FormInput
-          // inputValue={description}
+          inputValue={description}
           big
           placeholder="¿De qué se trata este vídeo?"
           name="descripcion"
@@ -116,7 +143,9 @@ const Add = () => {
           <ActionBtn type="submit" main>
             Guardar
           </ActionBtn>
-          <ActionBtn type="button">limpiar</ActionBtn>
+          <ActionBtn action={clearInputs} type="button">
+            limpiar
+          </ActionBtn>
         </ButtonContainer>
       </FormStyles>
     </AddContainer>

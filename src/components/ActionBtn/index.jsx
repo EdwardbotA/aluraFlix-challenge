@@ -20,11 +20,19 @@ const ButtonStyles = styled.button`
     props.$main ? "inset 0px 0px 12px 2px rgb(34, 113, 209)" : ""};
 `;
 
-const ActionBtn = ({ children, main, type }) => {
+const ActionBtn = ({ children, main, type, action }) => {
   return (
-    <ButtonStyles type={type} $main={main}>
-      {children}
-    </ButtonStyles>
+    <>
+      {action ? (
+        <ButtonStyles onClick={() => action()} type={type} $main={main}>
+          {children}
+        </ButtonStyles>
+      ) : (
+        <ButtonStyles type={type} $main={main}>
+          {children}
+        </ButtonStyles>
+      )}
+    </>
   );
 };
 

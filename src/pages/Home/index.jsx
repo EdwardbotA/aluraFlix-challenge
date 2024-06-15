@@ -10,7 +10,7 @@ const HomeContainer = styled.section`
   flex-direction: column;
   flex: 1;
   padding-bottom: 100px;
-	
+
   @media (width > 1024px) {
     padding-bottom: 0;
   }
@@ -41,13 +41,7 @@ const Home = () => {
       <Banner />
       {videos.length > 0 ? (
         categories.map((category) => (
-          <CourseSection
-            key={category.id}
-            category={category}
-            videos={videos.filter(
-              (video) => video.Categoria === category.nombre
-            )}
-          />
+          <CourseSection key={category.id} category={category} />
         ))
       ) : (
         <DivStyles>No hay videos que mostrar</DivStyles>

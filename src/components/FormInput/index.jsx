@@ -76,6 +76,7 @@ const FormInput = ({
           placeholder={placeholder}
           onChange={handleChange}
           name={name}
+          required
         />
       ) : (
         <InputStyles
@@ -85,6 +86,7 @@ const FormInput = ({
           placeholder={placeholder}
           onChange={handleChange}
           name={name}
+          required
         />
       )}
     </LabelStyles>

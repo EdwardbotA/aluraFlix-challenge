@@ -39,6 +39,7 @@ const FormStyles = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 40px;
 `;
 
@@ -94,6 +95,7 @@ const Modal = ({ video, closeModal }) => {
     description,
     handleInputChange,
     updateVideoInfo,
+    clearInputs,
   } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -176,7 +178,9 @@ const Modal = ({ video, closeModal }) => {
                 <ActionBtn type="submit" main>
                   Guardar
                 </ActionBtn>
-                <ActionBtn type="button">limpiar</ActionBtn>
+                <ActionBtn action={clearInputs} type="button">
+                  limpiar
+                </ActionBtn>
               </ButtonContainer>
             </FormStyles>
           </DialogStyles>
