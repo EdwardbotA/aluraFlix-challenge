@@ -14,6 +14,7 @@ const GlobalContextProvider = ({ children }) => {
   const [description, setDescription] = useState("");
 
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [popup, setPopup] = useState({ show: false, message: "", type: "" });
 
   useEffect(() => {
     fetch("http://localhost:3000/categorias")
@@ -40,12 +41,27 @@ const GlobalContextProvider = ({ children }) => {
         const newVideos = videos.filter((video) => video.id !== id);
 
         setVideos(newVideos);
+        setPopup({
+          show: true,
+          message: "video eliminado con éxito",
+          type: "success",
+        });
 
-        alert("video eliminado con éxito");
+        setTimeout(() => {
+          setPopup({ show: false, message: "", type: "" });
+        }, 3000);
       })
       .catch((err) => {
         console.error("Error: ", err);
-        alert("Hubo un problema al eliminar el video");
+        setPopup({
+          show: true,
+          message: `Hubo un problema al eliminar el video: ${err}`,
+          type: "error",
+        });
+
+        setTimeout(() => {
+          setPopup({ show: false, message: "", type: "" });
+        }, 3000);
       });
   };
 
@@ -78,9 +94,27 @@ const GlobalContextProvider = ({ children }) => {
         });
 
         setVideos(newInfo);
+        setPopup({
+          show: true,
+          message: "video Actualizado con éxito",
+          type: "success",
+        });
+
+        setTimeout(() => {
+          setPopup({ show: false, message: "", type: "" });
+        }, 3000);
       })
       .catch((err) => {
         console.error("Error: ", err);
+        setPopup({
+          show: true,
+          message: `Hubo un problema al actualizar el video: ${err}`,
+          type: "error",
+        });
+
+        setTimeout(() => {
+          setPopup({ show: false, message: "", type: "" });
+        }, 3000);
       });
   };
 
@@ -116,11 +150,27 @@ const GlobalContextProvider = ({ children }) => {
       })
       .then((newVideo) => {
         setVideos([...videos, newVideo]);
-        alert(`Se ha agregado con exito el video: ${newVideo.titulo}`);
+        setPopup({
+          show: true,
+          message: `Se ha agregado con exito el video: ${newVideo.titulo}`,
+          type: "success",
+        });
+
+        setTimeout(() => {
+          setPopup({ show: false, message: "", type: "" });
+        }, 3000);
       })
       .catch((err) => {
         console.error("Error:", err);
-        alert("Hubo un problema al agregar el video");
+        setPopup({
+          show: true,
+          message: `Hubo un problema al agregar el video: ${err}`,
+          type: "error",
+        });
+
+        setTimeout(() => {
+          setPopup({ show: false, message: "", type: "" });
+        }, 3000);
       });
   };
 
@@ -166,6 +216,7 @@ const GlobalContextProvider = ({ children }) => {
         videos,
         categories,
         selectedVideo,
+        popup,
         handleInputChange,
         setSelectedVideo,
         setCategory,

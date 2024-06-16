@@ -4,6 +4,7 @@ import CourseSection from "../../components/CourseSection";
 import Modal from "../../components/Modal";
 import { useContext } from "react";
 import { GlobalContext } from "../../context/Context";
+import Popup from "../../components/Popup";
 
 const HomeContainer = styled.section`
   display: flex;
@@ -33,7 +34,7 @@ const DivStyles = styled.div`
 `;
 
 const Home = () => {
-  const { categories, selectedVideo, setSelectedVideo, videos } =
+  const { categories, selectedVideo, setSelectedVideo, videos, popup } =
     useContext(GlobalContext);
 
   return (
@@ -47,6 +48,7 @@ const Home = () => {
         <DivStyles>No hay videos que mostrar</DivStyles>
       )}
       <Modal video={selectedVideo} closeModal={() => setSelectedVideo(null)} />
+      {popup.show && <Popup message={popup.message} type={popup.type} />}
     </HomeContainer>
   );
 };

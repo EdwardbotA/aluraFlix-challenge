@@ -1,12 +1,12 @@
 {
   "videos": [
     {
-      "id": 1,
       "titulo": "cuando usar let,var y const",
-      "linkVideo": "https://www.youtube.com/watch?v=PztCEdIJITY",
-      "linkImagenVideo": "https://i.ytimg.com/vi/PztCEdIJITY/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD2qK3Zjt_Y4Di7_0Hv5sJjrvkosQ",
       "Categoria": "Front End",
-      "decripcion": "In the modern design world, Lorem Ipsum is the industry standard when placing dummy text onto an unfinished page, whether it's a newspaper, magazine, or advertisement. The Latin text was first used in the 16th century, when a printer scrambled a row of type (known as a "
+      "linkImagenVideo": "https://i.ytimg.com/vi/PztCEdIJITY/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD2qK3Zjt_Y4Di7_0Hv5sJjrvkosQ",
+      "linkVideo": "https://www.youtube.com/watch?v=PztCEdIJITY",
+      "descripcion": "In the modern design world, Lorem Ipsum is the industry standard when placing dummy text onto an unfinished page, whether it's a newspaper, magazine, or advertisement. The Latin text was first used in the 16th century, when a printer scrambled a row of type (known as a ",
+      "id": 1
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "linkVideo": "https://www.youtube.com/watch?v=GJfOSoaXk4s&t=433s",
       "linkImagenVideo": "https://i.ytimg.com/vi/GJfOSoaXk4s/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAKpxz6vMwTw26HQyprrrwHFadQ2g",
       "Categoria": "Front End",
-      "decripcion": ""
+      "descripcion": ""
     },
     {
       "titulo": "Que son las softs skills",

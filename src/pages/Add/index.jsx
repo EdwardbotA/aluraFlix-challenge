@@ -5,6 +5,7 @@ import { ButtonContainer } from "../../components/Modal";
 import OptionInput from "../../components/OptionInput";
 import { useContext, useEffect } from "react";
 import { GlobalContext } from "../../context/Context";
+import Popup from "../../components/Popup";
 
 const AddContainer = styled.section`
   background-color: var(--main-background-black);
@@ -74,6 +75,7 @@ const Add = () => {
     handleInputChange,
     createNewVideo,
     clearInputs,
+    popup,
   } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -148,6 +150,7 @@ const Add = () => {
           </ActionBtn>
         </ButtonContainer>
       </FormStyles>
+      {popup.show && <Popup message={popup.message} type={popup.type} />}
     </AddContainer>
   );
 };
