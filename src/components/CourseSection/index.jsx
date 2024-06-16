@@ -44,7 +44,7 @@ const CourseSection = ({ category }) => {
           <CourseTitle color={color}>{nombre}</CourseTitle>
           <CourseContainer>
             {videos
-              .filter((video) => video.Categoria === category.nombre)
+              .filter((video) => video.Categoria === nombre)
               .map((video) => (
                 <Card color={color} key={video.id} video={video} />
               ))}

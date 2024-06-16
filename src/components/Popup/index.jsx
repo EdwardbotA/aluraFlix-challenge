@@ -20,6 +20,10 @@ const PopupStyles = styled.div`
   justify-content: center;
   gap: 40px;
   z-index: 10;
+
+	@media (width > 1024px) {
+		width: 700px;
+	}
 `;
 
 const Popup = ({ message, type }) => {

@@ -14,6 +14,7 @@ const BannerStyles = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+	justify-content: center;
   padding-top: 40px;
   gap: 20px;
 

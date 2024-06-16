@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { GlobalContext } from "../../context/Context";
 
 const LabelStyles = styled.label`

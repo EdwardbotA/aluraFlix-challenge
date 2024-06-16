@@ -37,11 +37,15 @@ const Home = () => {
   const { categories, selectedVideo, setSelectedVideo, videos, popup } =
     useContext(GlobalContext);
 
+  const categoriesWithVideos = categories.filter((categoria) =>
+    videos.some((video) => video.Categoria === categoria.nombre)
+  );
+
   return (
     <HomeContainer>
       <Banner />
       {videos.length > 0 ? (
-        categories.map((category) => (
+        categoriesWithVideos.map((category) => (
           <CourseSection key={category.id} category={category} />
         ))
       ) : (
