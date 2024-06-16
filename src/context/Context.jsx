@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { json } from "react-router-dom";
 
 export const GlobalContext = createContext();
 
@@ -27,30 +28,60 @@ const GlobalContextProvider = ({ children }) => {
   }, []);
 
   const deleteVideo = (id) => {
-    const newVideos = videos.filter((video) => video.id !== id);
+    fetch(`http://localhost:3000/videos/${id}`, { method: "DELETE" })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Error al eliminar el video");
+        }
 
-    setVideos(newVideos);
+        return res.json();
+      })
+      .then(() => {
+        const newVideos = videos.filter((video) => video.id !== id);
+
+        setVideos(newVideos);
+
+        alert("video eliminado con éxito");
+      })
+      .catch((err) => {
+        console.error("Error: ", err);
+        alert("Hubo un problema al eliminar el video");
+      });
   };
 
   const updateVideoInfo = (data) => {
     const { title, category, image, videoLink, description, id } = data;
 
-    const newInfo = videos.map((video) => {
-      if (video.id === id) {
-        return {
-          ...video,
-          titulo: title,
-          Categoria: category,
-          linkImagenVideo: image,
-          linkVideo: videoLink,
-          descripcion: description,
-        };
-      }
+    const updatedVideo = {
+      titulo: title,
+      Categoria: category,
+      linkImagenVideo: image,
+      linkVideo: videoLink,
+      descripcion: description,
+    };
 
-      return video;
-    });
+    fetch(`http://localhost:3000/videos/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(updatedVideo),
+    })
+      .then((result) => result.json())
+      .then((updatedVideoFromServer) => {
+        const newInfo = videos.map((video) => {
+          if (video.id === id) {
+            return updatedVideoFromServer;
+          }
 
-    setVideos(newInfo);
+          return video;
+        });
+
+        setVideos(newInfo);
+      })
+      .catch((err) => {
+        console.error("Error: ", err);
+      });
   };
 
   const createNewVideo = (data) => {
@@ -69,11 +100,31 @@ const GlobalContextProvider = ({ children }) => {
       id: newId,
     };
 
-    return setVideos([...videos, infoToSend]);
+    fetch(`http://localhost:3000/videos`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(infoToSend),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Error al crear el video");
+        }
+
+        return res.json();
+      })
+      .then((newVideo) => {
+        setVideos([...videos, newVideo]);
+        alert(`Se ha agregado con exito el video: ${newVideo.titulo}`);
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+        alert("Hubo un problema al agregar el video");
+      });
   };
 
   const clearInputs = () => {
-		console.log('hola');
     setTitle("");
     setCategory("");
     setImage("");

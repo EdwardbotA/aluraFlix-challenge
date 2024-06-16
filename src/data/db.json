@@ -6,7 +6,7 @@
       "linkVideo": "https://www.youtube.com/watch?v=PztCEdIJITY",
       "linkImagenVideo": "https://i.ytimg.com/vi/PztCEdIJITY/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD2qK3Zjt_Y4Di7_0Hv5sJjrvkosQ",
       "Categoria": "Front End",
-      "descripcion": "In the modern design world, Lorem Ipsum is the industry standard when placing dummy text onto an unfinished page, whether it's a newspaper, magazine, or advertisement. The Latin text was first used in the 16th century, when a printer scrambled a row of type (known as a "
+      "decripcion": "In the modern design world, Lorem Ipsum is the industry standard when placing dummy text onto an unfinished page, whether it's a newspaper, magazine, or advertisement. The Latin text was first used in the 16th century, when a printer scrambled a row of type (known as a "
     },
     {
       "id": 2,
@@ -87,6 +87,14 @@
       "descripcion": "¿Estás empezando tus estudios de Programación? ¿Te interesa todo lo que es la creación de Páginas Web Desarrollo de Softwares? ¿O estás pensando en cambiar de carrera y entrar a la maravillosa area de tecnología?",
       "linkImagenVideo": "https://res.cloudinary.com/dkj7iqhfy/image/upload/v1685821856/q58g3swdjnxv30u3jkux.png",
       "id": 16
+    },
+    {
+      "Categoria": "Data Science",
+      "descripcion": "En este video te llevaremos por las mejores técnicas para mejorar tu aprendizaje y retención. Ya sea que estés estudiando",
+      "linkVideo": "https://youtu.be/KSyqCUAr2CU?si=xACWe6LNVqHH0adG",
+      "linkImagenVideo": "https://i.ytimg.com/vi/KSyqCUAr2CU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBvH4yObXB7m7x6AiA5D6k27pJWMQ",
+      "titulo": "Técnicas para mejorar tu aprendizaje #AluraMás",
+      "id": 3
     }
   ],
   "categorias": [
