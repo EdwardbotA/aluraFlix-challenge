@@ -76,6 +76,7 @@ const Add = () => {
     createNewVideo,
     clearInputs,
     popup,
+		setErrorMessages,
   } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -84,6 +85,7 @@ const Add = () => {
     handleInputChange("imagen", "");
     handleInputChange("video", "");
     handleInputChange("descripcion", "");
+		setErrorMessages({})
   }, []);
 
   const handleSubmit = (e) => {

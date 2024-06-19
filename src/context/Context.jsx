@@ -53,20 +53,27 @@ const GlobalContextProvider = ({ children }) => {
 
   // llamado Categorias desde API
   useEffect(() => {
-    fetch("http://localhost:3000/categorias")
+    fetch(
+      "https://my-json-server.typicode.com/EdwardbotA/aluraflix-database/categorias"
+    )
       .then((res) => res.json())
       .then((data) => setCategories(data));
   }, []);
 
   // llamado videos desde API
   useEffect(() => {
-    fetch("http://localhost:3000/videos")
+    fetch(
+      "https://my-json-server.typicode.com/EdwardbotA/aluraflix-database/videos"
+    )
       .then((res) => res.json())
       .then((data) => setVideos(data));
   }, []);
 
   const deleteVideo = (id) => {
-    fetch(`http://localhost:3000/videos/${id}`, { method: "DELETE" })
+    fetch(
+      `https://my-json-server.typicode.com/EdwardbotA/aluraflix-database/videos/${id}`,
+      { method: "DELETE" }
+    )
       .then((res) => {
         if (!res.ok) {
           throw new Error("Error al eliminar el video");
@@ -113,13 +120,16 @@ const GlobalContextProvider = ({ children }) => {
       descripcion: description,
     };
 
-    fetch(`http://localhost:3000/videos/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(updatedVideo),
-    })
+    fetch(
+      `https://my-json-server.typicode.com/EdwardbotA/aluraflix-database/videos/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(updatedVideo),
+      }
+    )
       .then((result) => result.json())
       .then((updatedVideoFromServer) => {
         const newInfo = videos.map((video) => {
@@ -171,13 +181,16 @@ const GlobalContextProvider = ({ children }) => {
       id: newId,
     };
 
-    fetch(`http://localhost:3000/videos`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(infoToSend),
-    })
+    fetch(
+      `https://my-json-server.typicode.com/EdwardbotA/aluraflix-database/videos`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(infoToSend),
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           throw new Error("Error al crear el video");
@@ -333,6 +346,7 @@ const GlobalContextProvider = ({ children }) => {
         createNewVideo,
         clearInputs,
         verifyField,
+        setErrorMessages,
       }}
     >
       {children}

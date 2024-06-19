@@ -117,6 +117,7 @@ const Modal = ({ video, closeModal }) => {
     let info = { title, image, category, videoLink, description, id };
 
     updateVideoInfo(info);
+    closeModal();
   };
 
   return (
