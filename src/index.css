@@ -23,5 +23,6 @@
   --shadow-color: #03122fc8;
   --background-modal: #03122f;
   --secondary-white: #ffffff;
+	--error-color: #E53935;
   font-size: 62.5%;
 }

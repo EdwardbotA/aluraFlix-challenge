@@ -50,7 +50,7 @@ const FormStyles = styled.form`
 
   @media (width > 1024px) {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
 `;
 
@@ -106,6 +106,8 @@ const Add = () => {
           inputValue={title}
           placeholder="Título del video"
           name="titulo"
+          minlength="3"
+          title="tienes que tener al menos 3 caracteres para ser valido"
         >
           Título
         </FormInput>
@@ -121,6 +123,8 @@ const Add = () => {
           placeholder="link de la imagen"
           type="url"
           name="imagen"
+          pattern="^https:\/\/i\.ytimg\.com\/vi\/.*$"
+					title="Por favor coloca una Url de youtube"
         >
           Imagen
         </FormInput>
@@ -129,6 +133,8 @@ const Add = () => {
           placeholder="Link del video"
           type="url"
           name="video"
+          pattern="^https:\/\/www\.youtube\.com\/watch\?v=.*$"
+          title="Por favor coloca una Url de youtube"
         >
           Video
         </FormInput>
@@ -137,6 +143,8 @@ const Add = () => {
           big
           placeholder="¿De qué se trata este vídeo?"
           name="descripcion"
+          minlength="3"
+          maxlength="6000"
         >
           Descripción
         </FormInput>

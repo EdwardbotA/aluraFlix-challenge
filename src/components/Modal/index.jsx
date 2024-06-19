@@ -124,9 +124,9 @@ const Modal = ({ video, closeModal }) => {
       {video && (
         <>
           <Overlay />
-          <DialogStyles open={!!video} onClose={closeModal}>
+          <DialogStyles open={!!video}>
             <FormStyles method="dialog" onSubmit={handleSubmit}>
-              <ButtonClose>
+              <ButtonClose type="button" onClick={closeModal}>
                 <img src={closeBtn} alt="Cerrar" />
               </ButtonClose>
               <TitleStyles>Editar card:</TitleStyles>
@@ -136,6 +136,8 @@ const Modal = ({ video, closeModal }) => {
                 placeholder="Título del video"
                 from="modal"
                 name="titulo"
+                minlength="3"
+                title="tienes que tener al menos 3 caracteres para ser valido"
               >
                 Título
               </FormInput>
@@ -153,6 +155,8 @@ const Modal = ({ video, closeModal }) => {
                 type="url"
                 from="modal"
                 name="imagen"
+                pattern="^https:\/\/i\.ytimg\.com\/vi\/.*$"
+                title="Por favor coloca una Url de youtube"
               >
                 Imagen
               </FormInput>
@@ -162,6 +166,8 @@ const Modal = ({ video, closeModal }) => {
                 type="url"
                 from="modal"
                 name="video"
+                pattern="^https:\/\/www\.youtube\.com\/watch\?v=.*$"
+                title="Por favor coloca una Url de youtube"
               >
                 Video
               </FormInput>
@@ -171,6 +177,8 @@ const Modal = ({ video, closeModal }) => {
                 placeholder="¿De qué se trata este vídeo?"
                 from="modal"
                 name="descripcion"
+                minlength="3"
+                maxlength="6000"
               >
                 Descripción
               </FormInput>

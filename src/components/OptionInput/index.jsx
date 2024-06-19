@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { GlobalContext } from "../../context/Context";
 
 const LabelStyles = styled.label`
@@ -32,6 +32,21 @@ const InputStyles = styled.select`
     props.$from === "modal"
       ? "3px solid var(--main-color-blue)"
       : "3px solid var(--main-gray)"};
+
+  ${(props) => {
+    if (props.$error) {
+      return css`
+        &:invalid {
+          border: 3px solid var(--error-color);
+        }
+      `;
+    }
+  }}
+`;
+
+const ErrorStyles = styled.span`
+  font-size: 1.5rem;
+  text-align: center;
 `;
 
 const OptionInput = ({
@@ -41,22 +56,25 @@ const OptionInput = ({
   inputValue = "",
   name,
 }) => {
-  const { categories, handleInputChange } = useContext(GlobalContext);
+  const { categories, handleInputChange, errorMessages, verifyField } =
+    useContext(GlobalContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     handleInputChange(name, value);
+    verifyField(e.target);
   };
 
   return (
     <LabelStyles $from={from}>
       {children}
       <InputStyles
+        $error={errorMessages[name]}
         $from={from}
         value={inputValue}
         name={name}
         onChange={handleChange}
-				required
+        required
       >
         <option value="" disabled defaultValue="" hidden>
           {placeholder}
@@ -67,6 +85,7 @@ const OptionInput = ({
           </option>
         ))}
       </InputStyles>
+      {errorMessages[name] && <ErrorStyles>{errorMessages[name]}</ErrorStyles>}
     </LabelStyles>
   );
 };

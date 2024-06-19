@@ -1,5 +1,39 @@
 import { createContext, useEffect, useState } from "react";
-import { json } from "react-router-dom";
+
+export const typeError = [
+  "valueMissing",
+  "typeMismatch",
+  "tooShort",
+  "tooLong",
+  "patternMismatch",
+];
+
+export const messages = {
+  titulo: {
+    valueMissing: "El campo titulo no puede estar vacío",
+    tooShort: "El titulo tiene que ser al menos de 3 caracteres",
+  },
+  categoria: {
+    valueMissing: "El campo categoria no puede estar vacío",
+  },
+  imagen: {
+    valueMissing: "El campo imagen no puede estar vacío",
+    typeMismatch: "La imagen tiene que ser una URL valida",
+    patternMismatch:
+      "La Url de la imagen tiene que empezar asi https://i.ytimg.com/vi/ y debe povenir de Youtube",
+  },
+  video: {
+    valueMissing: "El campo video no puede estar vacío",
+    typeMismatch: "El video tiene que ser una URL valida",
+    patternMismatch:
+      "La Url del video debe povenir de Youtube con la siguiete estructura https://www.youtube.com/watch?v=",
+  },
+  descripcion: {
+    valueMissing: "El campo descripcion no puede estar vacío",
+    tooShort: "La descripcion tiene que ser al menos de 3 caracteres",
+    tooLong: "La descripcion alcanzo su logintud maxima",
+  },
+};
 
 export const GlobalContext = createContext();
 
@@ -15,13 +49,16 @@ const GlobalContextProvider = ({ children }) => {
 
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [popup, setPopup] = useState({ show: false, message: "", type: "" });
+  const [errorMessages, setErrorMessages] = useState({});
 
+  // llamado Categorias desde API
   useEffect(() => {
     fetch("http://localhost:3000/categorias")
       .then((res) => res.json())
       .then((data) => setCategories(data));
   }, []);
 
+  // llamado videos desde API
   useEffect(() => {
     fetch("http://localhost:3000/videos")
       .then((res) => res.json())
@@ -174,30 +211,99 @@ const GlobalContextProvider = ({ children }) => {
       });
   };
 
+  // verificacion de inputs
   const clearInputs = () => {
     setTitle("");
     setCategory("");
     setImage("");
     setVideo("");
     setDescription("");
+    setIsFormValid(false);
   };
+
+  const verifyField = (field) => {
+    let message = "";
+
+    field.setCustomValidity("");
+
+    typeError.forEach((error) => {
+      if (field.validity[error]) {
+        message = messages[field.name][error] || "Campo invalido";
+      }
+    });
+
+    setErrorMessages((prevErrors) => ({
+      ...prevErrors,
+      [field.name]: message,
+    }));
+  };
+
+  const [formFields, setFormFields] = useState({});
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    const allValid = Object.values(formFields).every(
+      (field) => field.validity.valid
+    );
+    setIsFormValid(allValid);
+  }, [formFields]);
 
   const handleInputChange = (name, value) => {
     switch (name) {
       case "titulo":
         setTitle(value);
+        setFormFields({
+          ...formFields,
+          [name]: {
+            ...formFields[name],
+            value: value,
+            validity: document.querySelector(`[name=${name}]`).validity,
+          },
+        });
         break;
       case "categoria":
         setCategory(value);
+        setFormFields({
+          ...formFields,
+          [name]: {
+            ...formFields[name],
+            value: value,
+            validity: document.querySelector(`[name=${name}]`).validity,
+          },
+        });
         break;
       case "imagen":
         setImage(value);
+        setFormFields({
+          ...formFields,
+          [name]: {
+            ...formFields[name],
+            value: value,
+            validity: document.querySelector(`[name=${name}]`).validity,
+          },
+        });
         break;
       case "video":
         setVideo(value);
+        setFormFields({
+          ...formFields,
+          [name]: {
+            ...formFields[name],
+            value: value,
+            validity: document.querySelector(`[name=${name}]`).validity,
+          },
+        });
         break;
       case "descripcion":
         setDescription(value);
+        setFormFields({
+          ...formFields,
+          [name]: {
+            ...formFields[name],
+            value: value,
+            validity: document.querySelector(`[name=${name}]`).validity,
+          },
+        });
         break;
 
       default:
@@ -217,6 +323,8 @@ const GlobalContextProvider = ({ children }) => {
         categories,
         selectedVideo,
         popup,
+        errorMessages,
+        isFormValid,
         handleInputChange,
         setSelectedVideo,
         setCategory,
@@ -224,6 +332,7 @@ const GlobalContextProvider = ({ children }) => {
         updateVideoInfo,
         createNewVideo,
         clearInputs,
+        verifyField,
       }}
     >
       {children}
